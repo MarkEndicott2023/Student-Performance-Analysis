@@ -1,26 +1,34 @@
 # Student Performance Analysis
 
-Predicting student exam scores using regression and classification models.
+CMSE 381 project predicting student exam scores (regression) and school type (classification) from survey-style academic and lifestyle features.
 
 ## Data
 
-`student_performance_factors.csv` — 6,607 student records, 20 features, 1 target variable (`Exam_Score`).
+`student_performance_factors.csv` — 6,607 student records, 19 features, target `Exam_Score`.
 
-**Numeric features:** Hours_Studied, Attendance, Sleep_Hours, Previous_Scores, Tutoring_Sessions, Physical_Activity
-
-**Categorical features:** Parental_Involvement, Access_to_Resources, Extracurricular_Activities, Motivation_Level, Internet_Access, Family_Income, Teacher_Quality, School_Type, Peer_Influence, Learning_Disabilities, Parental_Education_Level, Distance_from_Home, Gender
+- **Numeric (6):** Hours_Studied, Attendance, Sleep_Hours, Previous_Scores, Tutoring_Sessions, Physical_Activity
+- **Categorical (13):** Parental_Involvement, Access_to_Resources, Extracurricular_Activities, Motivation_Level, Internet_Access, Family_Income, Teacher_Quality, School_Type, Peer_Influence, Learning_Disabilities, Parental_Education_Level, Distance_from_Home, Gender
 
 ## Models
 
-- **OLS Regression** — baseline, R² = 0.598
-- **Lasso Regression** — L1 regularization for feature selection
-- **Lasso + Polynomial Features** — degree-2 interactions, R² = 0.764
-- **Perceptron** — linear classifier for School Type prediction
-- **Random Forest** — ensemble classifier with stratified k-fold CV
+**Regression (target: Exam_Score)** — metrics on full fit
+
+| Model | R² | RMSE | MAE |
+|---|---|---|---|
+| OLS (numeric features) | 0.598 | 2.466 | 1.312 |
+| LassoCV (numeric features) | 0.598 | 2.466 | 1.313 |
+| LassoCV + degree-2 polynomial features | 0.764 | 1.825 | — |
+
+**Classification (target: School_Type)**
+
+| Model | Accuracy |
+|---|---|
+| Perceptron | 0.643 (test) |
+| Random Forest (stratified 5-fold CV) | 0.670 |
+| Logistic Regression, L1 penalty (LogisticRegressionCV) | 0.500 (test) |
 
 ## Notebooks
 
-- `tinkering_mark.ipynb` — OLS, Lasso, Perceptron, Random Forest
-- `tinkering_mason.ipynb` — Polynomial feature engineering + Lasso regression
-- `project_template.ipynb` — Project structure template
-
+- [tinkering_mark.ipynb](tinkering_mark.ipynb) — OLS, Lasso, Perceptron, Random Forest
+- [tinkering_mason.ipynb](tinkering_mason.ipynb) — Polynomial Lasso regression, L1 logistic classification
+- [project_template.ipynb](project_template.ipynb) — project structure template
